@@ -15,7 +15,7 @@ const appImages = {
   //////////////Ratting//////////////
   Rattings: require(IMAGES_DIR + 'RattingsCheck.png'),
 
-  ///////////////modal///////////
+  ///////////////modal///////////////
   CheckCircle: require(IMAGES_DIR + 'Check.png'),
   ExclaimCircle: require(IMAGES_DIR + 'exclamation.png'),
 
