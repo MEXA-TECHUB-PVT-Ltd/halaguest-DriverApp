@@ -110,8 +110,9 @@ const Rattings = ({navigation, route}) => {
     })
       .then(async function (response) {
         console.log('response', JSON.stringify(response.data));
+        await AsyncStorage.removeItem('OngoingStatus');
         HotelSendNotification();
-        // setModalVisible(true)
+       // GenerateInvoice()
       })
       .catch(function (error) {
         if (error) {
@@ -122,7 +123,34 @@ const Rattings = ({navigation, route}) => {
         console.log('error', error);
       });
   };
+////////////////post Generate Invoice function//////////////
+const GenerateInvoice = async () => {
+  var user = await AsyncStorage.getItem('Userid');
+  var date = new Date();
+  console.log('userid:', user, date);
+  axios({
+    method: 'POST',
+    url: BASE_URL + 'api/invoice/createInvoice',
+    data: {
+      order_id: route.params.orderid,
+      status: "pending",
+      created_at: date,
+    },
+  })
+    .then(async function (response) {
+      console.log('response', JSON.stringify(response.data));
+      HotelSendNotification();
+      // setModalVisible(true)
+    })
+    .catch(function (error) {
+      if (error) {
+        console.log('Issue in Appoinments Acceptence');
+        //setModalVisible1(true)
+      }
 
+      console.log('error', error);
+    });
+};
   const ratingCompleted = rating => {
     console.log('Rating is: ' + rating);
     setRatting(rating);
@@ -315,7 +343,7 @@ const Rattings = ({navigation, route}) => {
           leftbuttontext={'CANCLE'}
           rightbuttontext={'OK'}
           onPress={() => {
-            setModalVisible(false), navigation.navigate('Orders');
+            setModalVisible(false), navigation.navigate('BottomTab');
           }}
         />
       </ScrollView>

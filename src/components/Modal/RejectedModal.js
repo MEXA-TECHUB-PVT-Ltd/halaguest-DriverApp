@@ -118,12 +118,32 @@ const RejectedModal = (props) => {
                   .then(function (response) {
                   console.log(' Cancel response', JSON.stringify(response.data));
                   GuestSendNotification()
-                    
+                  UpdateRideStatus()
                   })
                   .catch(function (error) {
                     console.log('error', error);
                   });
               };
+              const UpdateRideStatus = async () => {
+                var user= await AsyncStorage.getItem('Userid')
+                console.log('here ids',props.order_id,"user",user,"driver loc:",driver_lat,driver_log)
+                    axios({
+                      method: 'POST',
+                      url: BASE_URL + 'api/Order/updateRideStatus',
+                      data: {
+                        _id: props.order_id,
+                        rideStatus: 'riding',
+                      },
+                    })
+                      .then(function (response) {
+                      console.log(' Cancel response', JSON.stringify(response.data));
+                      GuestSendNotification()
+                        
+                      })
+                      .catch(function (error) {
+                        console.log('error', error);
+                      });
+                  };
 
                        //////////////////////Notification/////////////////
            const HotelSendNotification = async () => {
