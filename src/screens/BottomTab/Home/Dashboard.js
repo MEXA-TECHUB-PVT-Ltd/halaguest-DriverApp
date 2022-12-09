@@ -191,7 +191,7 @@ setDriver_location(addressComponent)
       ? null
       : Orders.slice(0, 3).map((item, key) => (
         <TouchableOpacity onPress={()=>navigation.navigate('TripDetail',{orderid:item._id,navplace:'Trip'})}
-        activeOpacity={true}
+        activeOpacity={0.9}
         >
           <OrdersCards
               time={item.flight_time}

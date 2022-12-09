@@ -143,7 +143,6 @@ const fetchTime = (d, t) => {
 }
 
 /////////////////////Update Order Api function and state////////////////////
-
 const CompleteOrder = async () => {
   var user= await AsyncStorage.getItem('Userid')
   console.log('userid:',user,"orderid",orderid);
@@ -265,10 +264,6 @@ const GetOrderDetail = async () => {
       console.log('error', error);
     });
 };
-
-
-
-
 
 const Timer=()=>{
   return(

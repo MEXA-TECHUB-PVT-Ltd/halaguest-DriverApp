@@ -92,10 +92,17 @@ Notifications.slice(0, 3).map((item, key) => (
         <NotificationView
         notitext={item.detail}
         notitime={item.created_at}
-        notiicon={item.detail === 'Order 123 is completed sucessfully' ?appImages.NotiCheck:
-        item.detail === 'Order 123 is cancel' ?appImages.NotiCancel:null
-       }
-                                   />
+        notiicon={
+          item.type === 'completed'
+            ? appImages.NotiCheck
+            : item.type === 'cancel'
+            ? appImages.NotiCancel 
+            : item.type === 'schedule'
+            ? appImages.NotiSchedule
+            : appImages.NotiOther
+        }
+      />
+                                
                           
 ))
         

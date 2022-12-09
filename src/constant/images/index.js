@@ -23,10 +23,11 @@ const appImages = {
   Trips: require(IMAGES_DIR + 'trips.png'),
   Transaction: require(IMAGES_DIR + 'transaction.png'),
 
-    //////////////////Notification///////////////
-    NotiCheck: require(IMAGES_DIR + 'noticheck.png'),
-    NotiCancel: require(IMAGES_DIR + 'noticancel.png'),
-    NotiSchedule: require(IMAGES_DIR + 'notischedule.png'),
+  //////////////////Notification///////////////
+  NotiCheck: require(IMAGES_DIR + 'noticheck.png'),
+  NotiCancel: require(IMAGES_DIR + 'noticancel.png'),
+  NotiSchedule: require(IMAGES_DIR + 'notischedule.png'),
+  NotiOther: require(IMAGES_DIR + 'bell.png'),
 
 //////////////////////chat/////////////
 chatsend: require(IMAGES_DIR + 'send.png'),

@@ -63,7 +63,7 @@ const TripRoute = ({ navigation,route }) => {
   const children = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60)
     const seconds = remainingTime % 60
-  
+  console.log('time counter',minutes+seconds)
     return `${minutes}:${seconds}`
   }
 
@@ -212,6 +212,26 @@ const[arrived,setArrived]=useState(false)
             console.log(error);
           });
             };
+            const UpdateRideStatus = async () => {
+              var user= await AsyncStorage.getItem('Userid')
+              console.log('here ids',orderid)
+                  axios({
+                    method: 'POST',
+                    url: BASE_URL + 'api/Order/updateRideStatus',
+                    data: {
+                      _id: orderid,
+                      rideStatus: 'reached',
+                    },
+                  })
+                    .then(function (response) {
+                    console.log(' Cancel response', JSON.stringify(response.data));
+                    GuestSendNotification()
+                      
+                    })
+                    .catch(function (error) {
+                      console.log('error', error);
+                    });
+                };
   useEffect(() => {
     GetOrderDetail()
     ref.current?.setAddressText('Rawalpindi');
@@ -259,8 +279,8 @@ const GetOrderDetail = async () => {
       setDriverCar(response.data[0].driver_id.vehicle_detail_id[0].make);
       setPickupLocation(response.data[0].pickup_location);
       setDropoffLocation(response.data[0].dropoff_location);
-      setPickupLat( Number(response.data[0].pickup_lat));
-      setPickupLng( Number(response.data[0].pickup_log));
+      setPickupLat(response.data[0].pickup_lat);
+      setPickupLng(response.data[0].pickup_log);
       setDropoffLat(response.data[0].dropoff_lat);
       setDropoffLng(response.data[0].dropoff_log);
       setOrderStatus(response.data[0].status);
@@ -476,7 +496,7 @@ style={[styles.lastView]}
          <Timer/>
             :
             null}
-            {arrived === true?null: <TouchableOpacity onPress={()=>GuestSendNotification()}
+            {arrived === true?null: <TouchableOpacity onPress={()=>UpdateRideStatus()}
        style={[styles.tripbtn,{backgroundColor:Colors.Appthemecolor,width:wp(70),alignSelf:'center'}]}>
                       <Text 
               style={styles.triptext}
